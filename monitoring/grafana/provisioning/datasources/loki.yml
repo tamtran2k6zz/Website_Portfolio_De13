@@ -1,0 +1,3 @@
+# Placeholder mount point. Stage 3 overlays this file with logging/grafana-loki.yml.
+apiVersion: 1
+datasources: []
