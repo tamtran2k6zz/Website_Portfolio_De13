@@ -1,0 +1,49 @@
+services:
+  init-log-storage:
+    image: busybox:1.37.0
+    user: "0:0"
+    restart: "no"
+    network_mode: none
+    command: ["sh", "-c", "chown -R 10001:10001 /loki /positions"]
+    volumes: ["loki_data:/loki", "promtail_positions:/positions"]
+
+  loki:
+    image: grafana/loki:3.4.2
+    user: "10001:10001"
+    restart: unless-stopped
+    command: ["-config.file=/etc/loki/config.yml"]
+    volumes: ["./logging/loki.yml:/etc/loki/config.yml:ro", "loki_data:/loki"]
+    networks: [monitoring]
+    depends_on:
+      init-log-storage: {condition: service_completed_successfully}
+    read_only: true
+    tmpfs: ["/tmp:size=32m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+
+  promtail:
+    image: grafana/promtail:3.4.2
+    user: "10001:10001"
+    restart: unless-stopped
+    command: ["-config.file=/etc/promtail/config.yml"]
+    volumes:
+      - ./logging/promtail.yml:/etc/promtail/config.yml:ro
+      - app_logs:/logs/app:ro
+      - nginx_logs:/logs/nginx:ro
+      - promtail_positions:/positions
+    networks: [monitoring]
+    depends_on:
+      loki: {condition: service_started}
+      init-log-storage: {condition: service_completed_successfully}
+      init-logs: {condition: service_completed_successfully}
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+
+  grafana:
+    volumes:
+      - ./logging/grafana-loki.yml:/etc/grafana/provisioning/datasources/loki.yml:ro
+
+volumes:
+  loki_data: {}
+  promtail_positions: {}
