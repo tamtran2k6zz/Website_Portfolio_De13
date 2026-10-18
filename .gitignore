@@ -1,0 +1,12 @@
+.env
+secrets/
+certs/
+backups/
+app/node_modules/
+app/logs/
+*.log
+.DS_Store
+__pycache__/
+docs/evidence/private/
+
+.work/

@@ -1,0 +1,5 @@
+<%- include('partials/header') %>
+<section class="hero"><p class="eyebrow">SINH VIÊN AN TOÀN THÔNG TIN</p><h1><%= profile.full_name %></h1><h2><%= profile.headline %></h2><p class="bio"><%= profile.bio %></p><div class="links"><a class="button" href="#projects">Xem dự án</a><a href="mailto:<%= profile.email %>">Liên hệ</a><% if(profile.github_url) { %><a href="<%= profile.github_url %>" rel="noopener noreferrer" target="_blank">GitHub</a><% } %></div></section>
+<section><p class="eyebrow">NĂNG LỰC</p><h2>Kỹ năng</h2><div class="skills"><% skills.forEach(skill => { %><div class="skill"><strong><%= skill.name %></strong><span><%= skill.level %></span></div><% }) %></div></section>
+<section id="projects"><p class="eyebrow">SẢN PHẨM THỰC HÀNH</p><h2>Dự án của tôi</h2><div class="grid"><% projects.forEach((project, i) => { %><article class="card"><div class="card-number"><%= String(i+1).padStart(2,'0') %></div><p class="tag"><%= project.stack %></p><h3><%= project.title %></h3><p><%= project.description.slice(0,180) %></p><a href="/projects/<%= project.id %>">Chi tiết dự án →</a></article><% }) %></div></section>
+<%- include('partials/footer') %>
