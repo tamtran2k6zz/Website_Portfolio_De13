@@ -6,14 +6,19 @@ import re
 import urllib.request
 import urllib.parse
 import urllib.error
+import ssl
 from compose import ROOT
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--base', default='http://localhost:8080')
+parser.add_argument('--ca-file', help='Trust the local self-signed certificate for HTTPS checks')
 args = parser.parse_args()
 env = dict(line.split('=',1) for line in (ROOT/'.env').read_text().splitlines() if '=' in line and not line.startswith('#'))
 jar = http.cookiejar.CookieJar()
-client = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
+handlers = [urllib.request.HTTPCookieProcessor(jar)]
+if args.ca_file:
+    handlers.append(urllib.request.HTTPSHandler(context=ssl.create_default_context(cafile=args.ca_file)))
+client = urllib.request.build_opener(*handlers)
 
 def request(path, values=None):
     data = urllib.parse.urlencode(values).encode() if values is not None else None

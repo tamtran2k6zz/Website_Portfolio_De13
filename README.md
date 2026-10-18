@@ -1,5 +1,11 @@
 # Đề 13: Portfolio có admin - Docker Compose
 
+Sinh viên: **Trần Đặng Công Tâm — DTC245220005 — ATTT K23A**. Giảng viên: **Nguyễn Anh Chuyên**.
+
+Repository: https://github.com/tamtran2k6zz/Website_Portfolio_De13
+
+Đã chạy thực nghiệm ngày 18/10/2026 trên Docker Desktop Linux: app/MySQL healthy, admin CRUD, phpMyAdmin, Nginx HTTP/HTTPS, 4 Prometheus targets UP, dashboard Grafana, 3 LogQL queries có dữ liệu và backup/restore thử. Xem [kết quả nghiệm thu](docs/KET_QUA_TRIEN_KHAI.md) và [ảnh minh chứng](docs/evidence/).
+
 Ứng dụng thật dùng Node.js/Express/EJS + MySQL, không dùng dữ liệu mock khi triển khai. Mục tiêu là hoàn thành các yêu cầu triển khai của môn Triển khai và Quản trị Hệ thống Phần mềm.
 
 **Bắt đầu:** đọc `docs/HUONG_DAN_A_Z.md`. **Viết báo cáo:** dùng `docs/KHUNG_BAO_CAO.md` và `docs/MINH_CHUNG.md`. Đọc phạm vi kiểm tra ở `docs/VALIDATION.md` trước khi tuyên bố hệ thống đã chạy.
@@ -76,7 +82,7 @@ npm run check
 npm audit --omit=dev
 ```
 
-Tests HTTP dùng repository và session store thay thế chỉ trong tests; không xác nhận tích hợp MySQL/container. Dockerfile chạy server thật với MySQL. Chưa có kết quả chạy toàn stack Docker trong môi trường tạo bộ file này.
+Tests HTTP dùng repository và session store thay thế chỉ trong tests; không xác nhận tích hợp MySQL/container. Kiểm chứng Docker thực tế được ghi riêng trong `docs/KET_QUA_TRIEN_KHAI.md`.
 
 ## Giới hạn
 
