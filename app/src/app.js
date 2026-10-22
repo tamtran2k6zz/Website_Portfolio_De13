@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
 import { randomBytes } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { projectVisual } from './project-visual.js';
 import { text, webUrl, positiveId, safeEqual, verifyPassword, hashPassword } from './security.js';
 
 const dummyHash = hashPassword(randomBytes(32).toString('hex'));
@@ -15,6 +16,7 @@ export function createApplication({repo, sessionStore, config, log}) {
   app.set('trust proxy', 1); // Only Nginx publishes the website port.
   app.set('view engine', 'ejs');
   app.set('views', fileURLToPath(new URL('../views/', import.meta.url)));
+  app.locals.projectVisual = projectVisual;
   app.use((req, res, next) => { res.locals.user = null; res.locals.csrf = ''; res.locals.isPortfolio = false; next(); });
   app.use(helmet({
     strictTransportSecurity: config.secure ? {maxAge: 86400} : false,

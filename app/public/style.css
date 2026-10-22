@@ -1142,3 +1142,5 @@ label,.top nav,.button,button,.text-link {
     font-size:clamp(34px,10vw,54px)
   }
 }
+
+.project-source{display:inline-block;margin-top:12px;font-size:14px}.project-no-image{margin:auto;text-align:center;color:var(--ink,#102d2b)}.project-no-image strong{font-size:clamp(36px,6vw,72px)}.project-no-image small{display:block;margin-top:24px}.project-detail-image{display:block;width:100%;height:auto;margin:28px 0;border-radius:12px}

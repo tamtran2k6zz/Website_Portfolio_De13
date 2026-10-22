@@ -1,0 +1,26 @@
+[
+  {
+    "title": "EduQuiz LMS — Nền tảng khảo thí và ôn luyện",
+    "description": "Ứng dụng ôn luyện các học phần lý luận chính trị, hỗ trợ nhiều dạng câu hỏi, phòng thi bấm giờ, lưu lịch sử và bảng vinh danh. Tích hợp đăng nhập Firebase và xuất kết quả PDF/Excel.",
+    "stack": "React · TypeScript · Vite · Tailwind CSS · Firebase",
+    "link": "https://github.com/tamtran2k6zz/My_Web_Server"
+  },
+  {
+    "title": "SmartBus — Hệ thống đặt vé xe buýt thông minh",
+    "description": "Dự án nhóm xây dựng ứng dụng tra cứu tuyến và chuyến xe, đặt vé, phát hành vé QR và theo dõi hành trình. Hỗ trợ quản lý tuyến, lịch trình và vận hành xe buýt; các tích hợp thanh toán phụ thuộc cấu hình môi trường.",
+    "stack": "React · TypeScript · Express · PostgreSQL",
+    "link": "https://github.com/tamtran2k6zz/Project_Smart_Bus_Ticketing_System_ictu"
+  },
+  {
+    "title": "ZShop — Trải nghiệm thương mại điện tử 3D",
+    "description": "Dự án giao diện thương mại điện tử kết hợp danh mục sản phẩm, giỏ hàng và trải nghiệm không gian 3D bằng Three.js. Quy trình thanh toán trong dự án là mô phỏng phục vụ học tập và trình diễn.",
+    "stack": "React · TypeScript · Vite · Tailwind CSS · Three.js",
+    "link": "https://github.com/tamtran2k6zz/_Web_ZShop"
+  },
+  {
+    "title": "Smart Clinic ICTU — Quản lý phòng khám",
+    "description": "Dự án nhóm quản lý hồ sơ bệnh nhân, lịch khám, hàng chờ, ca trực và viện phí. Dashboard hỗ trợ theo dõi hoạt động phòng khám; trợ lý AI hỗ trợ tác vụ hành chính, không thay thế tư vấn hoặc chẩn đoán của bác sĩ.",
+    "stack": "React · FastAPI · SQLAlchemy · MySQL · Docker",
+    "link": "https://github.com/tamtran2k6zz/He_thong_quan_ly_phong_kham"
+  }
+]
