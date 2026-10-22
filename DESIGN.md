@@ -11,16 +11,16 @@ colors:
 typography:
   body:
     fontFamily: "Manrope, system-ui, sans-serif"
-    fontSize: "15px"
+    fontSize: "16px"
     lineHeight: 1.7
   display:
     fontFamily: "Manrope, system-ui, sans-serif"
-    fontSize: "clamp(48px, 7.6vw, 96px)"
+    fontSize: "clamp(42px, 6.5vw, 82px)"
     fontWeight: 500
     lineHeight: 1.04
     letterSpacing: "-0.04em"
   accent:
-    fontFamily: "Newsreader, Georgia, serif"
+    fontFamily: "Manrope, system-ui, sans-serif"
     fontWeight: 400
 rounded:
   surface: "14px"
@@ -45,7 +45,7 @@ Một portfolio biên tập sáng, lấy nội dung và hình ảnh bài thực 
 Nền trắng ngà, chữ xanh đen, thông tin phụ xanh xám. Dự án dùng nền pastel theo chủ đề; section liên hệ dùng xanh lá nhạt. Giữ chữ và viền tương phản đủ trên giao diện quản trị.
 
 ## Typography
-Manrope là font nội dung và tiêu đề, Newsreader dùng cho phần serif nhấn mạnh. Font tự host trong public/fonts, đi kèm giấy phép OFL. Tiêu đề chính co giãn theo viewport; body, biểu mẫu và nội dung dự án giữ hệ thống sans để dễ đọc tiếng Việt.
+Manrope là font duy nhất cho toàn bộ nội dung, tiêu đề, phần nhấn mạnh và biểu mẫu; không dùng serif hoặc chữ nghiêng. Font tự host trong public/fonts, đi kèm giấy phép OFL. Ảnh chân dung thật và logo ICTU nằm trong cụm thông tin cá nhân đầu trang, giữ tỷ lệ gốc. Tiêu đề chính co giãn theo viewport; body, biểu mẫu và nội dung dự án giữ hệ thống sans để dễ đọc tiếng Việt.
 
 ## Layout
 Trang chính rộng tối đa 1296px với gutter 48px desktop và 20px mobile. Hero căn giữa; phần dự án mở đầu bằng một ảnh rộng, sau đó hai cột. Dưới 650px chuyển về một cột. Giới thiệu chia hai cột, tiêu đề sticky ở desktop; kỹ năng dạng hàng có đường phân cách. Header và footer giới hạn 1392px. Admin và trang chi tiết dùng app-main 1120px.
