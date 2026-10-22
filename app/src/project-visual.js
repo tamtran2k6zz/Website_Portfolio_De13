@@ -1,4 +1,5 @@
 const screenshots = {
+  'website_portfolio_de13': 'portfolio-home.webp',
   'my_web_server': 'eduquiz.webp',
   'project_smart_bus_ticketing_system_ictu': 'smartbus.webp',
   'he_thong_quan_ly_phong_kham': 'clinic.webp'

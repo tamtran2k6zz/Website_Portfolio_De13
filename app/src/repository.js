@@ -7,7 +7,7 @@ export function createRepository(pool) {
     ping: () => rows('SELECT 1'),
     findUser: async username => (await rows('SELECT id, username, password_hash FROM users WHERE username = ?', [username]))[0],
     profile: async () => (await rows('SELECT * FROM profiles WHERE id = 1'))[0],
-    projects: () => rows('SELECT * FROM projects ORDER BY id DESC'),
+    projects: () => rows('SELECT * FROM projects ORDER BY id ASC'),
     skills: () => rows('SELECT * FROM skills ORDER BY id'),
     project: async id => (await rows('SELECT * FROM projects WHERE id = ?', [id]))[0],
     saveProfile: value => rows('UPDATE profiles SET full_name=?, headline=?, bio=?, email=?, github_url=? WHERE id=1', [value.full_name, value.headline, value.bio, value.email, value.github_url]),

@@ -2,6 +2,7 @@
 """Import the owner's project catalog without deleting existing projects."""
 import json
 import subprocess
+import sys
 from compose import ROOT, command
 
 catalog = json.loads((ROOT / 'db/portfolio-projects.json').read_text(encoding='utf-8'))
@@ -9,7 +10,7 @@ assert len({item['link'] for item in catalog}) == len(catalog)
 code = r'''
 import mysql from 'mysql2/promise';
 let input = ''; for await (const chunk of process.stdin) input += chunk;
-const projects = JSON.parse(input);
+const {projects, onlyCatalog} = JSON.parse(input);
 const db = await mysql.createConnection({host: process.env.DB_HOST || 'mysql', user: 'portfolio_app', password: process.env.APP_DB_PASSWORD, database: 'portfolio', charset: 'utf8mb4'});
 try {
   await db.beginTransaction();
@@ -22,9 +23,15 @@ try {
     if (existing.length) await db.execute('UPDATE projects SET title=?, description=?, stack=?, link=? WHERE id=?', [...values, existing[0].id]);
     else await db.execute('INSERT INTO projects(title,description,stack,link) VALUES(?,?,?,?)', values);
   }
+  if (onlyCatalog) {
+    const links = ['https://github.com/tamtran2k6zz/Website_Portfolio_De13', ...projects.map(project => project.link)];
+    await db.execute('DELETE FROM projects WHERE link IS NULL OR link NOT IN (' + links.map(() => '?').join(',') + ')', links);
+    const [[count]] = await db.execute('SELECT COUNT(*) AS total FROM projects');
+    if (count.total !== 5) throw new Error('Expected exactly five catalog projects');
+  }
   await db.commit();
   console.log('Updated portfolio title and synchronized ' + projects.length + ' GitHub projects.');
 } catch (error) { await db.rollback(); throw error; }
 finally { await db.end(); }
 '''
-subprocess.run(command(3) + ['exec', '-T', 'app', 'node', '--input-type=module', '-e', code], input=json.dumps(catalog).encode(), cwd=ROOT, check=True)
+subprocess.run(command(3) + ['exec', '-T', 'app', 'node', '--input-type=module', '-e', code], input=json.dumps({'projects': catalog, 'onlyCatalog': '--only-catalog' in sys.argv}).encode(), cwd=ROOT, check=True)
