@@ -15,7 +15,7 @@ export function createApplication({repo, sessionStore, config, log}) {
   app.set('trust proxy', 1); // Only Nginx publishes the website port.
   app.set('view engine', 'ejs');
   app.set('views', fileURLToPath(new URL('../views/', import.meta.url)));
-  app.use((req, res, next) => { res.locals.user = null; res.locals.csrf = ''; next(); });
+  app.use((req, res, next) => { res.locals.user = null; res.locals.csrf = ''; res.locals.isPortfolio = false; next(); });
   app.use(helmet({
     strictTransportSecurity: config.secure ? {maxAge: 86400} : false,
     contentSecurityPolicy: {directives: {'upgrade-insecure-requests': config.secure ? [] : null}}
@@ -63,7 +63,7 @@ export function createApplication({repo, sessionStore, config, log}) {
   });
   app.get('/', async (req, res) => {
     const [profile, projects, skills] = await Promise.all([repo.profile(), repo.projects(), repo.skills()]);
-    res.render('index', {profile, projects, skills});
+    res.render('index', {profile, projects, skills, isPortfolio: true});
   });
   app.get('/projects/:id', async (req, res) => {
     const project = await repo.project(positiveId(req.params.id));
